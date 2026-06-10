@@ -179,7 +179,7 @@ function analyzeFace(lm) {
   // Head tilt from nose tip and chin
   const noseTip = lm[1];
   const chin    = lm[175];
-  const tiltAngle = Math.atan2(chin.x - noseTip.x, chin.y - noseTip.y) * 180 / Math.PI;
+  const tiltAngle = Math.atan2(chin.y - noseTip.y, chin.x - noseTip.x) * 180 / Math.PI;
 
   // Determine emotion
   let emotion = EMOTIONS[3]; // neutral
