@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SignBridge — Sign Language Learning & Detection</title>
+  <link rel="stylesheet" href="main.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand">
+    <div class="brand-icon"><i class="fa-solid fa-hands-asl-interpreting"></i></div>
+    <span class="brand-name">Sign<span class="accent">Bridge</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="detect.html">Detect</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
+    <li><a href="face.html">Face AI</a></li>
+  </ul>
+  <div class="nav-cta">
+    <a href="detect.html" class="btn-nav">Try Live Detection</a>
+  </div>
+  <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-shapes">
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3"></div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <div class="hero-badge"><i class="fa-solid fa-circle-dot pulse-dot"></i> AI-Powered · Real-Time Detection</div>
+      <h1 class="hero-title">
+        Speak with<br/>
+        <span class="title-gradient">Your Hands</span>
+      </h1>
+      <p class="hero-subtitle">
+        SignBridge uses live camera AI to detect sign language gestures, hand signs, numbers, and facial expressions — all in real time. Learn, practice, and communicate.
+      </p>
+      <div class="hero-btns">
+        <a href="detect.html" class="btn-primary"><i class="fa-solid fa-camera"></i> Open Live Camera</a>
+        <a href="lessons.html" class="btn-secondary"><i class="fa-solid fa-book-open"></i> Start Learning</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><span class="stat-num">26+</span><span class="stat-label">ASL Letters</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">10+</span><span class="stat-label">Numbers</span></div>
+        <div class="stat-div"></div>
+        <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Emotions</span></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-img-wrap">
+        <!-- SVG Illustration: Person signing with AI overlay -->
+        <svg viewBox="0 0 420 480" xmlns="http://www.w3.org/2000/svg" class="hero-svg">
+          <defs>
+            <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#1a6cff" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#0a1628" stop-opacity="0"/>
+            </radialGradient>
+            <linearGradient id="skinGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f8c89a"/>
+              <stop offset="100%" stop-color="#e8a070"/>
+            </linearGradient>
+            <linearGradient id="shirtGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1a6cff"/>
+              <stop offset="100%" stop-color="#0d3d99"/>
+            </linearGradient>
+            <linearGradient id="handGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f9d4a8"/>
+              <stop offset="100%" stop-color="#e8a070"/>
+            </linearGradient>
+            <filter id="glow">
+              <feGaussianBlur stdDeviation="3" result="blur"/>
+              <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+
+          <!-- Background glow -->
+          <ellipse cx="210" cy="260" rx="190" ry="210" fill="url(#bgGlow)"/>
+
+          <!-- Person body -->
+          <rect x="130" y="230" width="160" height="180" rx="18" fill="url(#shirtGrad)"/>
+          <!-- Collar -->
+          <path d="M185 230 Q210 260 235 230" fill="#0d3d99" stroke="#1a6cff" stroke-width="1.5"/>
+
+          <!-- Neck -->
+          <rect x="193" y="195" width="34" height="42" rx="10" fill="url(#skinGrad)"/>
+
+          <!-- Head -->
+          <ellipse cx="210" cy="175" rx="52" ry="58" fill="url(#skinGrad)"/>
+
+          <!-- Hair -->
+          <path d="M158 165 Q162 110 210 108 Q258 110 262 165 Q255 130 210 128 Q165 130 158 165Z" fill="#2a1a0a"/>
+
+          <!-- Eyes -->
+          <ellipse cx="193" cy="168" rx="8" ry="9" fill="white"/>
+          <ellipse cx="193" cy="169" rx="5" ry="6" fill="#1a3a6c"/>
+          <ellipse cx="194" cy="168" rx="2" ry="2" fill="#0d1a2e"/>
+          <ellipse cx="227" cy="168" rx="8" ry="9" fill="white"/>
+          <ellipse cx="227" cy="169" rx="5" ry="6" fill="#1a3a6c"/>
+          <ellipse cx="228" cy="168" rx="2" ry="2" fill="#0d1a2e"/>
+          <!-- Eye shine -->
+          <circle cx="190" cy="165" r="1.5" fill="white" opacity="0.9"/>
+          <circle cx="224" cy="165" r="1.5" fill="white" opacity="0.9"/>
+
+          <!-- Eyebrows -->
+          <path d="M184 157 Q193 152 202 157" stroke="#2a1a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M218 157 Q227 152 236 157" stroke="#2a1a0a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Nose -->
+          <path d="M207 175 Q205 185 210 188 Q215 185 213 175" stroke="#c8856a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Smile -->
+          <path d="M196 198 Q210 210 224 198" stroke="#c8856a" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+          <!-- Left arm -->
+          <path d="M130 270 Q90 300 75 340" stroke="#1a6cff" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <path d="M130 270 Q90 300 75 340" stroke="#0d3d99" stroke-width="24" stroke-linecap="round" fill="none"/>
+
+          <!-- RIGHT hand raised — ASL "B" shape (peace/open) -->
+          <!-- Arm -->
+          <path d="M290 270 Q330 290 340 240" stroke="#1a6cff" stroke-width="28" stroke-linecap="round" fill="none"/>
+          <path d="M290 270 Q330 290 340 240" stroke="#0d3d99" stroke-width="24" stroke-linecap="round" fill="none"/>
+
+          <!-- Hand palm -->
+          <ellipse cx="342" cy="218" rx="26" ry="30" fill="url(#handGrad)"/>
+          <!-- Fingers up (4 fingers) -->
+          <rect x="318" y="175" width="10" height="48" rx="5" fill="url(#handGrad)"/>
+          <rect x="331" y="170" width="10" height="53" rx="5" fill="url(#handGrad)"/>
+          <rect x="344" y="172" width="10" height="51" rx="5" fill="url(#handGrad)"/>
+          <rect x="357" y="176" width="10" height="45" rx="5" fill="url(#handGrad)"/>
+          <!-- Thumb -->
+          <ellipse cx="310" cy="220" rx="9" ry="16" fill="url(#handGrad)" transform="rotate(-20 310 220)"/>
+          <!-- Knuckle lines -->
+          <path d="M318 196 Q323 193 328 196" stroke="#c8856a" stroke-width="1" fill="none"/>
+          <path d="M331 191 Q336 188 341 191" stroke="#c8856a" stroke-width="1" fill="none"/>
+          <path d="M344 193 Q349 190 354 193" stroke="#c8856a" stroke-width="1" fill="none"/>
+          <path d="M357 197 Q362 194 367 197" stroke="#c8856a" stroke-width="1" fill="none"/>
+
+          <!-- AI detection box around hand -->
+          <rect x="298" y="158" width="88" height="82" rx="6" fill="none" stroke="#00d4ff" stroke-width="2" stroke-dasharray="6 3" opacity="0.9" filter="url(#glow)">
+            <animate attributeName="opacity" values="0.9;0.4;0.9" dur="2s" repeatCount="indefinite"/>
+          </rect>
+          <!-- Corner brackets -->
+          <path d="M298 170 L298 158 L310 158" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M374 158 L386 158 L386 170" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M298 228 L298 240 L310 240" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M374 240 L386 240 L386 228" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+          <!-- Detection label -->
+          <rect x="302" y="243" width="80" height="22" rx="5" fill="#00d4ff" opacity="0.9"/>
+          <text x="342" y="258" text-anchor="middle" font-family="Space Grotesk" font-size="11" font-weight="700" fill="#0a1628">SIGN: "B"</text>
+
+          <!-- Skeleton dots on hand -->
+          <circle cx="323" cy="175" r="3" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+          <circle cx="336" cy="170" r="3" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+          <circle cx="349" cy="172" r="3" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+          <circle cx="362" cy="176" r="3" fill="#00d4ff" opacity="0.8" filter="url(#glow)"/>
+          <circle cx="342" cy="218" r="4" fill="#00d4ff" opacity="0.6" filter="url(#glow)"/>
+
+          <!-- Face detection box -->
+          <rect x="158" y="118" width="104" height="120" rx="8" fill="none" stroke="#4af0a0" stroke-width="1.8" stroke-dasharray="5 4" opacity="0.7">
+            <animate attributeName="opacity" values="0.7;0.3;0.7" dur="3s" repeatCount="indefinite"/>
+          </rect>
+          <rect x="163" y="243" width="94" height="20" rx="5" fill="#4af0a0" opacity="0.85"/>
+          <text x="210" y="257" text-anchor="middle" font-family="Space Grotesk" font-size="10" font-weight="700" fill="#0a1628">😊 HAPPY · 96%</text>
+
+          <!-- Floating data chips -->
+          <rect x="18" y="140" width="90" height="28" rx="8" fill="#0d1f45" stroke="#1a6cff" stroke-width="1.2" opacity="0.95"/>
+          <text x="63" y="152" text-anchor="middle" font-family="Space Grotesk" font-size="9" fill="#a0c4ff">GESTURE DETECTED</text>
+          <text x="63" y="163" text-anchor="middle" font-family="Space Grotesk" font-size="10" font-weight="700" fill="#00d4ff">Peace ✌️</text>
+
+          <rect x="20" y="310" width="82" height="28" rx="8" fill="#0d1f45" stroke="#4af0a0" stroke-width="1.2" opacity="0.95"/>
+          <text x="61" y="322" text-anchor="middle" font-family="Space Grotesk" font-size="9" fill="#a0f0c4">CONFIDENCE</text>
+          <text x="61" y="333" text-anchor="middle" font-family="Space Grotesk" font-size="10" font-weight="700" fill="#4af0a0">98.4%</text>
+
+          <rect x="305" y="340" width="96" height="28" rx="8" fill="#0d1f45" stroke="#1a6cff" stroke-width="1.2" opacity="0.95"/>
+          <text x="353" y="352" text-anchor="middle" font-family="Space Grotesk" font-size="9" fill="#a0c4ff">HAND LANDMARKS</text>
+          <text x="353" y="363" text-anchor="middle" font-family="Space Grotesk" font-size="10" font-weight="700" fill="#00d4ff">21 Points</text>
+
+          <!-- Scanning line animation -->
+          <line x1="158" y1="178" x2="262" y2="178" stroke="#4af0a0" stroke-width="1.5" opacity="0.5">
+            <animateTransform attributeName="transform" type="translate" from="0 -60" to="0 120" dur="2.5s" repeatCount="indefinite"/>
+            <animate attributeName="opacity" values="0.5;0.1;0.5" dur="2.5s" repeatCount="indefinite"/>
+          </line>
+
+          <!-- Particle dots bg -->
+          <circle cx="50" cy="60" r="3" fill="#1a6cff" opacity="0.4"/>
+          <circle cx="370" cy="80" r="2" fill="#00d4ff" opacity="0.5"/>
+          <circle cx="30" cy="400" r="4" fill="#4af0a0" opacity="0.3"/>
+          <circle cx="390" cy="430" r="3" fill="#1a6cff" opacity="0.4"/>
+          <circle cx="100" cy="460" r="2" fill="#00d4ff" opacity="0.3"/>
+        </svg>
+      </div>
+      <!-- Floating cards -->
+      <div class="float-card card-top">
+        <i class="fa-solid fa-hand-peace" style="color:#00d4ff"></i>
+        <div>
+          <div class="fc-label">Detected</div>
+          <div class="fc-value">Peace Sign ✌️</div>
+        </div>
+      </div>
+      <div class="float-card card-bottom">
+        <i class="fa-solid fa-face-smile" style="color:#4af0a0"></i>
+        <div>
+          <div class="fc-label">Emotion</div>
+          <div class="fc-value">Happy 😊 96%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i></div>
+</section>
+
+<!-- FEATURES -->
+<section class="features" id="features">
+  <div class="section-label">What SignBridge Can Do</div>
+  <h2 class="section-title">Four Panels. One Platform.</h2>
+  <div class="features-grid">
+    <a href="detect.html" class="feature-card">
+      <div class="fc-icon" style="background:linear-gradient(135deg,#1a6cff22,#00d4ff22);border-color:#1a6cff44">
+        <i class="fa-solid fa-hands" style="color:#1a6cff"></i>
+      </div>
+      <h3>Sign Language Detection</h3>
+      <p>Live camera detects ASL/ISL hand gestures and shows what you're signing in real time with landmark overlay.</p>
+      <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+    <a href="detect.html#numbers" class="feature-card">
+      <div class="fc-icon" style="background:linear-gradient(135deg,#00d4ff22,#4af0a022);border-color:#00d4ff44">
+        <i class="fa-solid fa-hand-point-up" style="color:#00d4ff"></i>
+      </div>
+      <h3>Number & Gesture Reading</h3>
+      <p>Identify hand numbers 0–9, open palm, fist, peace, thumbs up and more — all recognized instantly.</p>
+      <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+    <a href="face.html" class="feature-card">
+      <div class="fc-icon" style="background:linear-gradient(135deg,#4af0a022,#1a6cff22);border-color:#4af0a044">
+        <i class="fa-solid fa-face-smile-wink" style="color:#4af0a0"></i>
+      </div>
+      <h3>Face & Emotion AI</h3>
+      <p>Detects facial landmarks, emotion states (happy, sad, surprised, neutral), and eye open/close status.</p>
+      <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+    <a href="lessons.html" class="feature-card">
+      <div class="fc-icon" style="background:linear-gradient(135deg,#1a6cff22,#4af0a022);border-color:#1a6cff44">
+        <i class="fa-solid fa-graduation-cap" style="color:#6fa8ff"></i>
+      </div>
+      <h3>Interactive Lessons</h3>
+      <p>Learn ASL alphabet, numbers, and common phrases with illustrated guides, quizzes, and practice exercises.</p>
+      <div class="card-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+    </a>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-it-works">
+  <div class="section-label">The Process</div>
+  <h2 class="section-title">How It Works</h2>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div class="step-icon"><i class="fa-solid fa-camera"></i></div>
+      <h4>Open Camera</h4>
+      <p>Allow camera access. No data is stored or transmitted. Everything runs in your browser.</p>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-num">02</div>
+      <div class="step-icon"><i class="fa-solid fa-brain"></i></div>
+      <h4>AI Analyzes</h4>
+      <p>MediaPipe tracks 21 hand landmarks and 478 face points in real time on-device.</p>
+    </div>
+    <div class="step-line"></div>
+    <div class="step">
+      <div class="step-num">03</div>
+      <div class="step-icon"><i class="fa-solid fa-comment-dots"></i></div>
+      <h4>See Results</h4>
+      <p>The detected sign, gesture, number, or emotion is shown instantly with confidence score.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<section class="cta-banner">
+  <div class="cta-content">
+    <i class="fa-solid fa-hands-asl-interpreting cta-icon"></i>
+    <div>
+      <h2>Ready to Bridge the Gap?</h2>
+      <p>Start detecting sign language right in your browser — no install needed.</p>
+    </div>
+    <div class="cta-actions">
+      <a href="detect.html" class="btn-primary">Open Live Detection <i class="fa-solid fa-arrow-right"></i></a>
+      <a href="lessons.html" class="btn-ghost">Browse Lessons</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-brand">
+    <div class="brand-icon small"><i class="fa-solid fa-hands-asl-interpreting"></i></div>
+    <span>Sign<span class="accent">Bridge</span></span>
+  </div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="detect.html">Detect</a>
+    <a href="lessons.html">Lessons</a>
+    <a href="face.html">Face AI</a>
+  </div>
+  <p class="footer-note">Built with MediaPipe · Runs entirely in your browser · No data stored</p>
+</footer>
+
+<script src="main.js"></script>
+</body>
+</html>

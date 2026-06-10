@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SignBridge — Live Detection</title>
+  <link rel="stylesheet" href="main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils/drawing_utils.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-brand">
+    <div class="brand-icon"><i class="fa-solid fa-hands-asl-interpreting"></i></div>
+    <span class="brand-name">Sign<span class="accent">Bridge</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="detect.html" class="active">Detect</a></li>
+    <li><a href="lessons.html">Lessons</a></li>
+    <li><a href="face.html">Face AI</a></li>
+  </ul>
+  <div class="nav-cta"><a href="face.html" class="btn-nav">Face Detection</a></div>
+  <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+</nav>
+
+<div class="page-header">
+  <div class="section-label">AI-Powered</div>
+  <h1>Live Sign Language <span class="title-gradient">Detection</span></h1>
+  <p>Show your hand to the camera — detect ASL letters, numbers, and gestures in real time.</p>
+</div>
+
+<div class="panel-layout">
+  <!-- CAMERA -->
+  <div>
+    <div class="camera-wrap" id="cameraWrap">
+      <video id="inputVideo" style="display:none" playsinline></video>
+      <canvas id="outputCanvas"></canvas>
+      <div class="cam-overlay" id="camPlaceholder">
+        <div class="cam-placeholder">
+          <i class="fa-solid fa-camera"></i>
+          <p>Press <strong>Start Camera</strong> to begin detection</p>
+          <p style="font-size:0.78rem;margin-top:0.4rem">Your camera feed stays on your device</p>
+        </div>
+      </div>
+      <!-- HUD overlays -->
+      <div id="hudTop" style="display:none;position:absolute;top:14px;left:14px;display:flex;gap:8px;flex-direction:column">
+        <div class="hud-chip" id="hudHands" style="background:rgba(13,31,69,0.88);border:1px solid rgba(26,108,255,0.4);border-radius:8px;padding:6px 12px;font-size:0.78rem;color:#6fa8ff;display:none">
+          <i class="fa-solid fa-hand" style="margin-right:5px"></i><span id="hudHandCount">0 hands</span>
+        </div>
+      </div>
+      <div id="fpsChip" style="display:none;position:absolute;top:14px;right:14px;background:rgba(13,31,69,0.88);border:1px solid rgba(26,108,255,0.4);border-radius:8px;padding:6px 12px;font-size:0.78rem;color:#7a9cc4">
+        <span id="fpsVal">-- FPS</span>
+      </div>
+    </div>
+    <!-- MODE TABS -->
+    <div style="margin-top:1rem">
+      <div class="tabs">
+        <button class="tab active" id="tabSigns" onclick="setMode('signs')"><i class="fa-solid fa-hands"></i> ASL Signs</button>
+        <button class="tab" id="tabNumbers" onclick="setMode('numbers')"><i class="fa-solid fa-hand-point-up"></i> Numbers</button>
+        <button class="tab" id="tabGestures" onclick="setMode('gestures')"><i class="fa-solid fa-hand-peace"></i> Gestures</button>
+      </div>
+      <div id="modeDesc" class="info-card" style="text-align:center;padding:0.8rem;font-size:0.85rem;color:var(--text-muted)">
+        <i class="fa-solid fa-circle-info" style="color:var(--blue-bright)"></i>
+        Show your hand to the camera and hold a sign. ASL mode detects letters A–Z.
+      </div>
+    </div>
+  </div>
+
+  <!-- SIDE PANEL -->
+  <div class="side-panel">
+    <button class="start-btn" id="startBtn" onclick="toggleCamera()">
+      <i class="fa-solid fa-camera"></i> Start Camera
+    </button>
+
+    <div class="info-card">
+      <h4>Detected Sign</h4>
+      <div class="detected-sign" id="detectedSign">—</div>
+      <div class="confidence-bar-wrap">
+        <div class="conf-label">
+          <span>Confidence</span>
+          <span id="confPct">0%</span>
+        </div>
+        <div class="conf-bar"><div class="conf-fill" id="confFill" style="width:0%"></div></div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h4>Sign Meaning</h4>
+      <div id="signMeaning" style="font-size:0.88rem;color:var(--text-muted);min-height:48px;line-height:1.6">
+        Hold up a hand sign to see its meaning here.
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h4>Hand Info</h4>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem">
+        <div style="font-size:0.78rem;color:var(--text-muted)">Landmarks<br/><span style="color:var(--white);font-weight:600" id="landmarkCount">—</span></div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">Handedness<br/><span style="color:var(--white);font-weight:600" id="handedness">—</span></div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">Fingers Up<br/><span style="color:var(--cyan);font-weight:600" id="fingersUp">—</span></div>
+        <div style="font-size:0.78rem;color:var(--text-muted)">Mode<br/><span style="color:var(--green);font-weight:600" id="currentMode">ASL Signs</span></div>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <h4>Detection Log</h4>
+      <div class="log-list" id="logList">
+        <div class="log-item">Waiting for camera… <span></span></div>
+      </div>
+    </div>
+
+    <div class="info-card" style="text-align:center">
+      <h4>Reference Chart</h4>
+      <div id="refChart" style="font-size:0.78rem;color:var(--text-muted)">Select a mode to see reference signs.</div>
+    </div>
+  </div>
+</div>
+
+<script src="detect.js"></script>
+</body>
+</html>

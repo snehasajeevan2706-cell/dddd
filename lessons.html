@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SignBridge — Lessons</title>
+  <link rel="stylesheet" href="main.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-brand">
+    <div class="brand-icon"><i class="fa-solid fa-hands-asl-interpreting"></i></div>
+    <span class="brand-name">Sign<span class="accent">Bridge</span></span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="detect.html">Detect</a></li>
+    <li><a href="lessons.html" class="active">Lessons</a></li>
+    <li><a href="face.html">Face AI</a></li>
+  </ul>
+  <div class="nav-cta"><a href="detect.html" class="btn-nav">Try Detection</a></div>
+  <button class="hamburger" id="hamburger"><i class="fa-solid fa-bars"></i></button>
+</nav>
+
+<div class="page-header">
+  <div class="section-label">Learn Sign Language</div>
+  <h1>Interactive <span class="title-gradient">Lessons</span></h1>
+  <p>Learn ASL alphabet, numbers, common phrases and gestures with illustrated guides.</p>
+</div>
+
+<div style="max-width:1200px;margin:0 auto;padding:0 2.5rem 80px;display:grid;grid-template-columns:1fr 360px;gap:1.5rem" id="lessonsLayout">
+
+  <!-- LEFT: Lesson content -->
+  <div>
+    <!-- Progress -->
+    <div class="info-card" style="margin-bottom:1rem">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
+        <h4 style="margin:0">Your Progress</h4>
+        <span id="progressText" style="font-size:0.82rem;color:var(--cyan)">0 / 36 learned</span>
+      </div>
+      <div class="conf-bar" style="height:10px;border-radius:5px">
+        <div class="conf-fill" id="progressFill" style="width:0%;height:100%"></div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active" id="tabAlpha" onclick="switchTab('alpha')">
+        <i class="fa-solid fa-font"></i> Alphabet (A–Z)
+      </button>
+      <button class="tab" id="tabNums" onclick="switchTab('numbers')">
+        <i class="fa-solid fa-hashtag"></i> Numbers 0–9
+      </button>
+      <button class="tab" id="tabPhrases" onclick="switchTab('phrases')">
+        <i class="fa-solid fa-comment"></i> Phrases
+      </button>
+    </div>
+
+    <!-- Sign Grid -->
+    <div class="lessons-grid" id="signGrid"></div>
+  </div>
+
+  <!-- RIGHT: Detail panel -->
+  <div>
+    <div class="info-card" id="detailCard" style="position:sticky;top:90px">
+      <div id="detailContent" style="text-align:center;padding:1rem">
+        <div style="font-size:4rem;margin-bottom:0.8rem">👋</div>
+        <div style="font-family:var(--font-head);font-size:1.1rem;color:var(--text-muted)">
+          Select a sign from the grid to see details, instructions, and tips.
+        </div>
+      </div>
+    </div>
+
+    <!-- Quiz Card -->
+    <div class="info-card" style="margin-top:1rem" id="quizCard">
+      <h4><i class="fa-solid fa-circle-question" style="color:var(--cyan);margin-right:5px"></i>Quick Quiz</h4>
+      <div id="quizContent" style="margin-top:0.8rem;text-align:center">
+        <div id="quizQuestion" style="font-family:var(--font-head);font-size:2.5rem;margin-bottom:0.8rem">?</div>
+        <div id="quizPrompt" style="font-size:0.88rem;color:var(--text-muted);margin-bottom:1rem">
+          Which letter is this sign?
+        </div>
+        <div id="quizOptions" style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem"></div>
+        <button onclick="newQuiz()" style="margin-top:0.8rem;width:100%;padding:0.6rem;border-radius:8px;border:1px solid var(--border);background:none;color:var(--blue-light);font-family:var(--font-head);cursor:pointer;font-size:0.85rem;transition:all 0.2s" onmouseover="this.style.borderColor='var(--blue-bright)'" onmouseout="this.style.borderColor='var(--border)'">
+          <i class="fa-solid fa-shuffle"></i> New Question
+        </button>
+      </div>
+    </div>
+
+    <div class="info-card" style="margin-top:1rem">
+      <h4><i class="fa-solid fa-lightbulb" style="color:#ffc850;margin-right:5px"></i>Tip</h4>
+      <p id="dailyTip" style="font-size:0.85rem;color:var(--text-muted);line-height:1.7;margin-top:0.5rem"></p>
+    </div>
+  </div>
+</div>
+
+<script src="lessons.js"></script>
+</body>
+</html>
