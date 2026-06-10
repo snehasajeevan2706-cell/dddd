@@ -19,6 +19,35 @@
   --radius-lg:  22px;
 }
 
+/* Light theme overrides: applied when documentElement has class .theme-light */
+.theme-light {
+  --bg-deep:    #ffffff; /* page background becomes white */
+  --bg-dark:    #e6f7ef; /* light green hint */
+  --bg-panel:   #f6fff8; /* panels */
+  --bg-card:    #f0fff3;
+  --blue-bright:#16a34a; /* darker green accent on light */
+  --blue-light: #4ade80; /* light green */
+  --cyan:       #10b981;
+  --green:      #16a34a;
+  --white:      #0b0b0b; /* text color on light theme */
+  --text-muted: #376b58;
+  --border:     #d1f5e0;
+}
+
+/* Theme toggle button */
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--white);
+  padding: 0.45rem 0.6rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: inline-flex; align-items: center; justify-content: center;
+}
+.theme-toggle:hover { background: rgba(255,255,255,0.03); }
+
+
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 html { scroll-behavior: smooth; }

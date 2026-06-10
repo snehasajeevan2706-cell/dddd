@@ -57,4 +57,35 @@ document.addEventListener('DOMContentLoaded', () => {
     c.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     obs.observe(c);
   });
+
+  // Theme toggle: inject a small button into the navbar and persist preference
+  (function setupThemeToggle(){
+    try {
+      const key = 'signbridge_theme';
+      const root = document.documentElement;
+      const nav = document.getElementById('navbar') || document.body;
+      const saved = localStorage.getItem(key);
+      if (saved === 'light') root.classList.add('theme-light');
+
+      const btn = document.createElement('button');
+      btn.id = 'themeToggle';
+      btn.className = 'theme-toggle';
+      const icon = () => root.classList.contains('theme-light') ? '<i class="fa-solid fa-moon"></i>' : '<i class="fa-solid fa-sun"></i>';
+      btn.innerHTML = icon();
+      btn.title = 'Toggle theme';
+      btn.onclick = () => {
+        const light = root.classList.toggle('theme-light');
+        localStorage.setItem(key, light ? 'light' : 'dark');
+        btn.innerHTML = icon();
+      };
+
+      const wrapper = document.createElement('div');
+      wrapper.style.display = 'flex';
+      wrapper.style.gap = '0.5rem';
+      wrapper.style.alignItems = 'center';
+      wrapper.style.marginLeft = '1rem';
+      wrapper.appendChild(btn);
+      if (nav) nav.appendChild(wrapper);
+    } catch (e) { console.error('theme toggle init failed', e); }
+  })();
 });
